@@ -5,17 +5,20 @@ import Logo from "../../../../public/logo/Lucrum Logo.png"
 
 import LoginForm from "@/components/login/login-form";
 
-export default function Signup() {
+export default function Login() {
     return (
-      <main className="w-full min-h-screen bg-white flex items-center justify-center">
-        <div className="w-80 h-80 p-5 rounded-3xl shadow-xl border flex flex-col items-center justify-center gap-y-5">
-            <h1 className="w-full flex items-center justify-center">
-                <Image src={Logo} alt="Logo" className="w-20"></Image>
-                <span className="text-amber-400 text-5xl font-semibold text-shadow-sm">Lucrum</span>
-            </h1>
-            <LoginForm />
-        </div>
-      </main>
+      <>
+        {/* Desktop View */}
+        <main className="w-full min-h-screen bg-white flex items-center justify-center">
+          <div className="w-80 h-80 p-5 rounded-3xl shadow-xl border flex flex-col items-center justify-center gap-y-5">
+              <h1 className="w-full flex items-center justify-center select-none">
+                  <Image src={Logo} alt="Logo" className="w-20"></Image>
+                  <span className="text-amber-400 text-5xl font-semibold text-shadow-sm">Lucrum</span>
+              </h1>
+              <LoginForm />
+          </div>
+        </main>
+      </>
     );
   }
   
