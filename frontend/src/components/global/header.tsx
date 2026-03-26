@@ -10,6 +10,7 @@ export default function Header(){
                 <Image src={Logo} alt="Logo" className="h-9/10 w-15"/>
                 <h1 className="text-amber-400 text-3xl font-semibold text-shadow-sm">Lucrum</h1>
             </div>
+            <p>hi</p>
         </header>
     )
 }
