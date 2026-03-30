@@ -1,4 +1,3 @@
-// src/components/auth/AccountCreationForm.tsx
 "use client";
 
 import { useState } from "react";

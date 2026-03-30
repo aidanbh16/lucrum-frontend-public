@@ -1,5 +1,4 @@
-// src/app/account-creation/page.tsx
-import AuthCard from "@/components/auth/Authcard";
+import AuthCard from "@/components/auth/AuthCard";
 import AccountCreationForm from "@/components/auth/AccountCreationForm";
 import { authStyles } from "@/styles/auth";
 

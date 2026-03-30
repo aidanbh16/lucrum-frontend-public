@@ -1,4 +1,3 @@
-// src/components/auth/AuthCard.tsx
 import Image from "next/image";
 import { ReactNode } from "react";
 import { authStyles } from "@/styles/auth";
