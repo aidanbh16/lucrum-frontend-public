@@ -3,6 +3,7 @@ import cors from "cors";
 import signupRoute from "./routes/signup.route";
 import loginRoute from "./routes/login.route";
 import cookieParser from "cookie-parser";
+import { env } from "./config/env";
 
 const app = express();
 
@@ -17,6 +18,6 @@ app.get("/", (req, res) => {
   res.send("Lucrum Account Management System is running");
 });
 
-app.listen(3001, () => {
+app.listen(env.PORT, () => {
   console.log("Server running on port 3001");
 });

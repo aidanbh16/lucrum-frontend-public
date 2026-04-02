@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { pool } from "../db/client";
 import { comparePassword } from "../utils/bcrypt";
+import { env } from "../config/env";
 import jwt from "jsonwebtoken";
 
 const router = Router();
@@ -28,7 +29,7 @@ router.post("/login", async (req, res) => {
 
         const token = jwt.sign(
             { userId: user.id },
-            process.env.JWT_SECRET!,
+            env.JWT_SECRET!,
             { expiresIn: "7d" }
         );
 
