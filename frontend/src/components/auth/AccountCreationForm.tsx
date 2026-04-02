@@ -9,7 +9,6 @@ export default function AccountCreationForm() {
   const router = useRouter();
 
   const [username, setUsername] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -21,7 +20,6 @@ export default function AccountCreationForm() {
   const validateForm = (): string => {
     if (
       !username.trim() ||
-      !phoneNumber.trim() ||
       !email.trim() ||
       !password.trim() ||
       !confirmPassword.trim()
@@ -31,11 +29,6 @@ export default function AccountCreationForm() {
 
     if (username.trim().length < 4) {
       return "Username must be at least 4 characters long.";
-    }
-
-    const phoneRegex = /^[0-9()\-\s+]{10,20}$/;
-    if (!phoneRegex.test(phoneNumber.trim())) {
-      return "Please enter a valid phone number.";
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -75,7 +68,6 @@ export default function AccountCreationForm() {
         },
         body: JSON.stringify({
           username: username.trim(),
-          phone_number: phoneNumber.trim(),
           email: email.trim(),
           password,
         }),
@@ -91,7 +83,6 @@ export default function AccountCreationForm() {
       setSuccess("Account successfully created!");
 
       setUsername("");
-      setPhoneNumber("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
@@ -121,22 +112,6 @@ export default function AccountCreationForm() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter username"
-            className={authStyles.input}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="phoneNumber" className={authStyles.label}>
-            Phone Number
-          </label>
-          <input
-            id="phoneNumber"
-            name="phoneNumber"
-            type="tel"
-            autoComplete="tel"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            placeholder="Enter phone number"
             className={authStyles.input}
           />
         </div>
