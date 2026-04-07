@@ -7,7 +7,11 @@ interface IncomeStream {
   source: string;
 }
 
-export default function IncomeForm() {
+interface IncomeFormProps {
+  onSuccess?: () => void;
+}
+
+export default function IncomeForm({ onSuccess }: IncomeFormProps) {
   const [streams, setStreams] = useState<IncomeStream[]>([{ amount: "", source: "" }]);
 
   const handleUpdateStream = (index: number, field: keyof IncomeStream, value: string) => {
@@ -24,15 +28,17 @@ export default function IncomeForm() {
     e.preventDefault();
     const dataToSave = streams.filter(s => s.amount || s.source);
     console.log("Saving All Streams:", dataToSave);
+    
+    if (onSuccess) {
+      onSuccess();
+    }
   };
 
   return (
-    <div className={incomeStyles.card}>
-      {/* Main Title */}
-      <h2 className={incomeStyles.title}>Add Monthly Income</h2>
+    <div className={`${incomeStyles.card} mx-auto w-full max-w-md`}>
+      <h2 className={`${incomeStyles.title} text-center`}>Add Monthly Income</h2>
       
-      {/* Smaller Subtitle */}
-      <h3 className="text-slate-400 text-sm font-medium uppercase tracking-wider mb-6">
+      <h3 className="text-slate-400 text-sm font-medium uppercase tracking-wider mb-6 text-center">
         Add Sources
       </h3>
 
@@ -40,7 +46,7 @@ export default function IncomeForm() {
         {streams.map((stream, index) => (
           <div key={index} className="flex gap-3 mb-4">
             <div className="flex-1">
-              <label className={incomeStyles.label}>Amount ($)</label>
+              <label className={`${incomeStyles.label} pl-2`}>Amount ($)</label>
               <input
                 type="number"
                 placeholder="0.00"
@@ -50,10 +56,10 @@ export default function IncomeForm() {
               />
             </div>
             <div className="flex-[2]">
-              <label className={incomeStyles.label}>Where from?</label>
+              <label className={`${incomeStyles.label} pl-2`}>Where from?</label>
               <input
                 type="text"
-                placeholder="e.g. Job, Freelance"
+                placeholder="ex: Freelance"
                 className={incomeStyles.input}
                 value={stream.source}
                 onChange={(e) => handleUpdateStream(index, "source", e.target.value)}

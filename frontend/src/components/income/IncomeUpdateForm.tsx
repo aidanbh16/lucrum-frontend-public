@@ -3,19 +3,21 @@ import { useState, useEffect } from "react";
 import { incomeStyles } from "@/styles/income";
 
 interface IncomeStream {
-  id: number; // We need IDs to know which record to update in the DB
+  id: number;
   amount: string;
   source: string;
 }
 
-export default function IncomeUpdateForm() {
+interface IncomeUpdateProps {
+  onBack?: () => void;
+}
+
+export default function IncomeUpdateForm({ onBack }: IncomeUpdateProps) {
   const [streams, setStreams] = useState<IncomeStream[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Simulating fetching data from your FastAPI backend
   useEffect(() => {
     const fetchExistingIncome = async () => {
-      // Fake data for now - later this will be: await fetch('http://localhost:8000/get-income')
       const mockData = [
         { id: 1, amount: "3200", source: "Main Job" },
         { id: 2, amount: "450", source: "Freelance" },
@@ -29,29 +31,32 @@ export default function IncomeUpdateForm() {
 
   const handleUpdate = (index: number, field: keyof IncomeStream, value: string) => {
     const newStreams = [...streams];
-    // @ts-ignore - simple way to handle the dynamic key update
-    newStreams[index][field] = value;
+    if (field === "amount" || field === "source") {
+      newStreams[index][field] = value;
+    }
     setStreams(newStreams);
   };
 
   const handleSaveUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Sending Updates to Backend:", streams);
-    alert("Changes saved successfully!");
+    if (onBack) {
+      onBack();
+    }
   };
 
-  if (loading) return <div className="text-white">Loading your income data...</div>;
+  if (loading) return <div className="text-white text-center p-10">Loading your income data...</div>;
 
   return (
-    <div className={incomeStyles.card}>
-      <h2 className={incomeStyles.title}>Update Monthly Income</h2>
-      <h3 className="text-emerald-400 text-sm font-medium uppercase tracking-wider mb-6">
+    <div className={`${incomeStyles.card} mx-auto w-full max-w-md`}>
+      <h2 className={`${incomeStyles.title} text-center`}>Update Monthly Income</h2>
+      <h3 className="text-emerald-400 text-sm font-medium uppercase tracking-wider mb-6 text-center">
         Edit Current Sources
       </h3>
 
       <form onSubmit={handleSaveUpdate} className={incomeStyles.form}>
         {streams.map((stream, index) => (
-          <div key={stream.id} className="flex gap-3 mb-4 p-3 rounded-lg border border-slate-700 bg-slate-700/30">
+          <div key={stream.id} className="flex gap-3 mb-4 p-3 rounded-lg border border-slate-700 bg-slate-700/30 text-left">
             <div className="flex-1">
               <label className={incomeStyles.label}>Amount</label>
               <input
@@ -77,6 +82,19 @@ export default function IncomeUpdateForm() {
           Confirm Changes
         </button>
       </form>
+
+      <div className="mt-6 text-center border-t border-slate-700/50 pt-4">
+        <button 
+          type="button" 
+          onClick={(e) => {
+            e.preventDefault();
+            if (onBack) onBack();
+          }}
+          className="text-slate-500 text-sm hover:text-white transition-colors"
+        >
+          Back to Summary
+        </button>
+      </div>
     </div>
   );
 }
