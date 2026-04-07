@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { authStyles } from "@/styles/auth";
+import { signupUser } from "@/library/auth";
 
 export default function AccountCreationForm() {
   const router = useRouter();
@@ -61,26 +62,13 @@ export default function AccountCreationForm() {
     try {
       setLoading(true);
 
-      const response = await fetch("http://localhost:8000/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username.trim(),
-          email: email.trim(),
-          password,
-        }),
-      });
+      const data = await signupUser(
+        username.trim(),
+        email.trim(),
+        password
+      );
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.message || "Could not create account.");
-        return;
-      }
-
-      setSuccess("Account successfully created!");
+      setSuccess(data.message || "Account successfully created!");
 
       setUsername("");
       setEmail("");
@@ -90,8 +78,8 @@ export default function AccountCreationForm() {
       setTimeout(() => {
         router.push("/account-signin");
       }, 1000);
-    } catch {
-      setError("Could not connect to the server.");
+    } catch (err: any) {
+      setError(err.message || "Could not connect to the server.");
     } finally {
       setLoading(false);
     }
