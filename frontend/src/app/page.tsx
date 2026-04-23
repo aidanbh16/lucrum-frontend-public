@@ -9,6 +9,7 @@ import Image from "next/image";
 
 export default function Home() {
   const [isSigningOut, setIsSigningOut] = useState(false);
+  const [totalIncome, setTotalIncome] = useState(0);
 
   const handleSignOut = () => {
     if (isSigningOut) return;
@@ -38,11 +39,11 @@ export default function Home() {
           </p>
 
         <section className="mb-8">
-          <MyIncome />
+          <MyIncome setTotalIncome={setTotalIncome} />
         </section>
 
         <section className="mb-8">
-          <AllocationManagement />
+          <AllocationManagement totalIncome={totalIncome} />
         </section>
 
       </div>
