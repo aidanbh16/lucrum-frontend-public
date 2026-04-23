@@ -1,5 +1,5 @@
-import AuthCard from "@/components/auth/AuthCard";
-import AccountCreationForm from "@/components/auth/AccountCreationForm";
+import AuthCard from "@/components/auth/authCard";
+import AccountCreationForm from "@/components/auth/accountCreationForm";
 import { authStyles } from "@/styles/auth";
 
 export default function AccountCreationPage() {

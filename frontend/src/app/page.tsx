@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import AllocationManagement from "@/components/allocation/FinalAllocation";
-import MyIncome from "@/components/income/MyIncome";
+import AllocationManagement from "@/components/allocation/finalAllocation";
+import MyIncome from "@/components/income/myIncome";
 import { incomeStyles } from "@/styles/income";
 import Image from "next/image";
 
@@ -14,7 +14,7 @@ export default function Home() {
   const handleSignOut = () => {
     if (isSigningOut) return;
     setIsSigningOut(true);
-    window.location.href = "/account-signout";
+    window.location.href = "/account-signin";
   };
 
 

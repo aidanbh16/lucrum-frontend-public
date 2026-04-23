@@ -1,5 +1,5 @@
-import AuthCard from "@/components/auth/AuthCard";
-import AccountSignInForm from "@/components/auth/AccountSignInForm";
+import AuthCard from "@/components/auth/authCard";
+import AccountSignInForm from "@/components/auth/accountSignInForm";
 import { authStyles } from "@/styles/auth";
 
 export default function AccountSignInPage() {

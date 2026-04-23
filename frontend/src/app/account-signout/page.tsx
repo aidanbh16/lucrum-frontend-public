@@ -1,5 +1,5 @@
-import AuthCard from "@/components/auth/AuthCard";
-import AccountSignOutPanel from "@/components/auth/AccountSignOutPanel";
+import AuthCard from "@/components/auth/authCard";
+import AccountSignOutPanel from "@/components/auth/accountSignOutPanel";
 import { authStyles } from "@/styles/auth";
 
 export default function AccountSignOutPage() {
