@@ -49,7 +49,8 @@ export default function CenterSideBySideIncome() {
 
   const handleSave = () => {
     const cleaned = editingStreams.filter(
-      (stream) => stream.source.trim() !== "" || stream.amount.trim() !== ""
+      (stream) => stream.source.trim() !== "" && stream.amount.trim() !== ""
+
     );
 
     setCommittedStreams(cleaned);
